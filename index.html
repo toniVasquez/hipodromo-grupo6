@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hipódromo Real · Apuestas en carreras de caballos</title>
+<style>
+:root{--g:#f7c600;--bg:#0e0e11;--c:#1a1a20;--c2:#23232b;--t:#f2f2f2;--m:#9a9aa8;--ok:#2ecc71;--er:#ff5252;--bd:#2e2e38}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--t)}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:9px 16px;font-weight:700;background:var(--c2);color:var(--t)}
+button:hover{filter:brightness(1.15)}.gold{background:var(--g);color:#000}.out{background:transparent;border:2px solid var(--g);color:var(--g)}.red{background:#3a1d1d;color:var(--er)}.sm{padding:5px 10px;font-size:.8rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 4%;background:#000;border-bottom:2px solid var(--g)}
+.logo{font-weight:900;font-size:1.5rem;letter-spacing:1px}.logo b{color:var(--g)}
+.ua{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.bal{color:var(--g);font-weight:800}
+nav{display:flex;gap:2px;overflow-x:auto;background:var(--g);padding:0 4%;position:sticky;top:0;z-index:20}
+nav a{padding:12px 16px;color:#000;font-weight:800;font-size:.82rem;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+nav a.on,nav a:hover{background:#000;color:var(--g)}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 4%}
+.hero{background:linear-gradient(#000b,#000d),repeating-linear-gradient(90deg,#1f4d1a 0 70px,#245a1e 70px 140px);padding:60px 4% 0;text-align:center;overflow:hidden}
+.hero h1{font-size:clamp(1.9rem,5.5vw,3.4rem);margin:0 0 10px}.hero h1 span{color:var(--g)}
+.hero p{max-width:600px;margin:0 auto 20px;color:#ddd}
+.track{position:relative;height:96px;margin-top:34px;border-top:4px dashed #fff5}
+.rn{position:absolute;bottom:6px;font-size:54px;transform:scaleX(-1);animation:run 7s linear infinite;filter:drop-shadow(0 6px 4px #0008)}
+@keyframes run{from{left:-90px}to{left:105%}}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.chip{background:var(--c);border:1px solid var(--bd);border-radius:99px;padding:8px 16px;font-size:.9rem}.chip b{color:var(--g)}
+h2{margin:0 0 14px;font-size:1.4rem}h2:after{content:"";display:block;width:50px;height:4px;background:var(--g);border-radius:2px;margin-top:6px}
+.card{background:var(--c);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.rc{background:var(--c);border:1px solid var(--bd);border-radius:14px;padding:16px}.rc h3{margin:4px 0}.rc small{color:var(--m)}
+.badge{padding:2px 10px;border-radius:99px;font-size:.72rem;font-weight:800;color:#000;background:var(--ok)}
+.badge.cerrada{background:#ffa726}.badge.finalizada{background:#9a9aa8}.badge.cancelada{background:var(--er);color:#fff}
+.layout{display:grid;grid-template-columns:1fr 330px;gap:20px}@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabs button.on{background:var(--g);color:#000}
+.hg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.hc{background:var(--c2);border:2px solid transparent;border-radius:14px;overflow:hidden;cursor:pointer;transition:.15s}
+.hc:hover{transform:translateY(-3px)}.hc.on{border-color:var(--g);box-shadow:0 0 0 3px #f7c60033}
+.art{position:relative;height:110px;background:linear-gradient(135deg,var(--c),#000);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.art:before{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:#2d6a27}
+.art img{width:100%;height:100%;object-fit:cover;position:absolute}
+.hz{position:relative;font-size:64px;transform:scaleX(-1);filter:drop-shadow(0 5px 3px #0009)}
+.no{position:absolute;top:8px;left:8px;width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid var(--g)}
+.silk{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:5px;background:var(--c);border:2px solid #fff}
+.in{padding:10px 12px;display:grid;gap:2px}.in h4{margin:0}.in small{color:var(--m)}.q{font-size:1.5rem;font-weight:900;color:var(--g)}
+.slip{background:linear-gradient(160deg,#25200a,#111);border:1px solid var(--g);border-radius:14px;padding:16px;position:sticky;top:60px}
+.slip h3{margin:0 0 8px;color:var(--g)}
+label{display:block;font-size:.8rem;font-weight:700;margin:10px 0 4px;color:#ccc}
+input,select,textarea{width:100%;padding:10px;border-radius:9px;border:1px solid var(--bd);background:#0c0c0f;color:var(--t);font:inherit}
+.pick{background:#0c0c0f;border-radius:9px;padding:9px;min-height:40px;font-size:.9rem}
+.qa{display:flex;gap:6px;margin-top:6px}.qa button{flex:1;padding:5px}
+.win{font-size:1.25rem;font-weight:900;color:var(--g);margin:12px 0}
+.ck{display:flex;gap:8px;align-items:center}.ck input{width:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}th{text-align:left;color:var(--g);padding:8px;border-bottom:2px solid var(--bd)}td{padding:8px;border-bottom:1px solid var(--bd)}
+.w{overflow-x:auto}.st{padding:2px 9px;border-radius:99px;font-size:.74rem;font-weight:800;background:#555}.Ganada,.Cobrada{background:var(--ok);color:#000}.Perdida{background:var(--er)}.Anulada{background:#ffa726;color:#000}
+.big{font-size:2.4rem;font-weight:900;color:var(--g)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--c2);border-radius:12px;padding:14px}.stat b{display:block;font-size:1.5rem;color:var(--g)}.stat small{color:var(--m)}
+.promo{background:linear-gradient(135deg,var(--g),#ffdf5e);color:#000;border-radius:14px;padding:18px;font-weight:600}.promo b{font-size:1.1rem}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){.f2{grid-template-columns:1fr}}
+dialog{border:1px solid var(--g);border-radius:16px;padding:22px;width:min(460px,94vw);background:var(--c);color:var(--t)}dialog::backdrop{background:#000b}
+dialog h3{margin-top:0}.row{display:flex;gap:8px;margin-top:14px}.row button{flex:1}
+.tk{background:#fff;color:#111;border-radius:12px;padding:16px;border:2px dashed #999;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88rem}
+.tk h4{margin:0 0 8px;text-align:center;font-size:1.1rem}.tk div{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dotted #bbb}.tk .cd{font-size:1.3rem;text-align:center;font-weight:900;display:block;margin:8px 0}
+.lane{display:flex;align-items:center;gap:8px;border-bottom:1px dashed var(--bd);height:44px}.lane .nm{width:100px;font-size:.78rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.lane .tr{position:relative;flex:1;height:100%;border-right:4px solid #fff}.rh{position:absolute;left:0;top:4px;font-size:30px;transform:scaleX(-1)}
+.pod{font-size:1.05rem;line-height:1.8;margin-top:12px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#000;border:1px solid var(--g);padding:12px 20px;border-radius:12px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:92vw;text-align:center}
+#toast.on{opacity:1}#toast.err{border-color:var(--er);color:var(--er)}
+footer{text-align:center;color:var(--m);padding:26px;font-size:.82rem;border-top:1px solid var(--bd)}footer a{color:var(--g);cursor:pointer}
+</style>
+</head>
+<body>
+<header class="top"><div class="logo">🐎 HIPÓDROMO <b>REAL</b></div><div class="ua" id="ua"></div></header>
+<nav id="nav"></nav>
+
+<section class="view" id="v-inicio">
+  <div class="hero">
+    <h1>Vive la emoción de las <span>carreras de caballos</span></h1>
+    <p>Mira el programa del día, elige a tu favorito, arma tu boleto y mira la carrera en vivo.</p>
+    <button class="gold" onclick="go('carreras')">Apostar ahora</button>
+    <div class="chips"><span class="chip">🏁 <b>3</b> carreras hoy</span><span class="chip">💰 Cuotas hasta <b>15.00</b></span><span class="chip">🎁 Bono de bienvenida <b>+10%</b></span></div>
+    <div class="track"><span class="rn" style="animation-delay:0s">🐎</span><span class="rn" style="animation-delay:-2.3s">🏇</span><span class="rn" style="animation-delay:-4.6s">🐎</span></div>
+  </div>
+  <div class="wrap"><h2>Próximas carreras</h2><div class="grid" id="home"></div></div>
+</section>
+
+<section class="view wrap" id="v-carreras" hidden>
+  <div class="layout">
+    <div>
+      <h2>Programa de carreras</h2>
+      <div class="tabs" id="tabs"></div>
+      <div class="card" id="rinfo"></div>
+      <div class="hg" id="horses"></div>
+    </div>
+    <aside><div class="slip">
+      <h3>🎫 Mi boleto</h3>
+      <label>Tipo de apuesta</label>
+      <select id="tipo" onchange="sel=[];ui()"><option>Ganador</option><option>Place</option><option>Exacta</option></select>
+      <label>Selección</label><div class="pick" id="pick"></div>
+      <label>Monto (S/)</label><input id="monto" type="number" min="1" value="10" oninput="slip()">
+      <div class="qa"><button onclick="qa(5)">5</button><button onclick="qa(10)">10</button><button onclick="qa(20)">20</button><button onclick="qa(50)">50</button></div>
+      <label class="ck" id="bl"><input type="checkbox" id="bono" onchange="slip()"> Usar bono (+10%)</label>
+      <div class="win" id="win"></div>
+      <button class="gold" style="width:100%" onclick="apostar()">Confirmar apuesta</button>
+      <p style="color:#aaa;font-size:.78rem;margin:10px 0 0">Ganador: 1.º · Place: 1.º o 2.º (cuota menor) · Exacta: 1.º y 2.º en orden.</p>
+    </div></aside>
+  </div>
+</section>
+
+<section class="view wrap" id="v-apuestas" hidden>
+  <h2>Mis apuestas</h2>
+  <div class="card"><div class="w"><table><thead><tr><th>Boleto</th><th>Carrera</th><th>Apuesta</th><th>Monto</th><th>Premio</th><th>Estado</th><th></th></tr></thead><tbody id="bets"></tbody></table></div></div>
+  <div class="card"><h3 style="margin-top:0">Consultar boleto</h3><div class="row"><input id="cb" placeholder="Código, ej: HR-48247"><button class="gold" style="flex:0 0 auto" onclick="consultar()">Buscar</button></div></div>
+</section>
+
+<section class="view wrap" id="v-billetera" hidden>
+  <h2>Mi billetera</h2>
+  <div class="layout">
+    <div class="card"><div class="w"><table><thead><tr><th>Fecha</th><th>Movimiento</th><th>Monto</th></tr></thead><tbody id="movs"></tbody></table></div></div>
+    <div class="card"><small>Saldo disponible</small><div class="big" id="bsal"></div>
+      <label>Monto a recargar (S/)</label><input id="rm" type="number" min="10" value="50">
+      <label>Medio de pago</label><select id="rp"><option>Tarjeta de crédito/débito</option><option>Yape</option><option>Transferencia bancaria</option></select>
+      <button class="gold" style="width:100%;margin-top:12px" onclick="recargar()">Recargar</button></div>
+  </div>
+</section>
+
+<section class="view wrap" id="v-promos" hidden>
+  <h2>Promociones</h2>
+  <div class="grid">
+    <div class="promo">🎁 <b>BIENVENIDO10</b><br>10% extra en el premio de tu próxima apuesta.</div>
+    <div class="promo">💳 <b>RECARGA10</b><br>Recarga S/ 100 o más y recibe S/ 10 de regalo.</div>
+    <div class="promo">⭐ <b>Carrera estelar</b><br>La Carrera 3 es la más esperada del día.</div>
+  </div>
+  <div class="card" style="margin-top:18px"><h3 style="margin-top:0">Canjear código</h3><div class="row"><input id="cod" placeholder="Escribe tu código"><button class="gold" style="flex:0 0 auto" onclick="canjear()">Canjear</button></div></div>
+</section>
+
+<section class="view wrap" id="v-admin" hidden>
+  <h2>Panel del administrador</h2>
+  <div class="stats" id="stats"></div>
+  <div class="layout">
+    <div class="card"><h3 style="margin-top:0">Gestionar carreras</h3><div class="w"><table><thead><tr><th>Carrera</th><th>Hora</th><th>Estado</th><th></th></tr></thead><tbody id="alist"></tbody></table></div></div>
+    <div class="card"><h3 style="margin-top:0">Nueva carrera</h3>
+      <label>Nombre</label><input id="cn"><div class="f2"><div><label>Hora</label><input id="ch" type="time" value="17:30"></div><div><label>Distancia</label><input id="cd" value="1400 m"></div></div>
+      <label>Caballos (uno por línea: nombre, jinete, cuota)</label><textarea id="cc" rows="5">Rey de Copas, A. Pérez, 3.5
+Dama Blanca, L. Soto, 4.0
+Tizón, M. Vera, 6.5</textarea>
+      <button class="gold" style="width:100%;margin-top:12px" onclick="crear()">Crear carrera</button></div>
+  </div>
+</section>
+
+<footer>Proyecto académico de simulación: no se hacen apuestas ni pagos reales. Solo para mayores de 18 años. · Cuenta admin: <b>admin / admin123</b> · <a onclick="if(confirm('¿Borrar todos los datos de la demo?')){localStorage.removeItem(K);location.reload()}">Reiniciar demo</a></footer>
+
+<dialog id="dAuth"><h3 id="at"></h3>
+  <label>Usuario</label><input id="au" autocomplete="username"><label>Contraseña</label><input id="ap" type="password">
+  <div class="rg"><label>Nombres y apellidos</label><input id="an"><div class="f2"><div><label>DNI</label><input id="ad" maxlength="8" inputmode="numeric"></div><div><label>Nacimiento</label><input id="af" type="date"></div></div></div>
+  <div class="row"><button class="gold" onclick="authGo()" id="ab"></button><button onclick="dAuth.close()">Cancelar</button></div>
+  <p style="text-align:center;font-size:.85rem"><a style="color:var(--g);cursor:pointer" id="as" onclick="auth(AM=='login'?'reg':'login')"></a></p></dialog>
+<dialog id="dTk"><div id="tkb"></div><div class="row"><button class="gold" onclick="dTk.close()">Cerrar</button></div></dialog>
+<dialog id="dRace"><h3 id="rt"></h3><div id="lanes"></div><div class="pod" id="pod"></div><div class="row"><button class="gold" id="rx" onclick="dRace.close()" disabled>Cerrar</button></div></dialog>
+<div id="toast"></div>
+
+<script>
+const $=i=>document.getElementById(i),K="hrv3",COL=["#c62828","#1565c0","#2e7d32","#6a1b9a","#ef6c00","#00838f","#ad1457","#455a64"];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),money=n=>"S/ "+n.toFixed(2),now=()=>new Date().toLocaleString("es-PE");
+function fo(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%997;return[1+h%4,1+(h>>2)%5,1+(h>>4)%6].join("-")}
+const H=a=>a.map((x,i)=>({n:x[0],j:x[1],q:x[2],col:COL[i%8],fo:fo(x[0])}));
+function init(){return{seq:1,rid:4,cur:null,users:{admin:{pass:"admin123",nom:"Administrador",admin:1,saldo:0,bets:[],movs:[]}},races:[
+{id:1,n:"Clásico Inaugural",h:"14:00",d:"1200 m",st:"abierta",c:H([["Trueno Negro","J. Rojas",2.4],["Luna de Plata","M. Paredes",3.1],["Rayo Veloz","A. Quispe",4.5],["Don Fermín","C. Salas",6],["Brisa Norteña","L. Vega",8.5],["El Gallardo","R. Cruz",12]])},
+{id:2,n:"Premio Trujillo",h:"15:00",d:"1600 m",st:"abierta",c:H([["Estrella Dorada","P. Ramos",2],["Viento Sur","D. Díaz",3.6],["Capitán","H. Torres",4.2],["La Chalaca","E. Mora",7],["Fuego Andino","S. León",9.5]])},
+{id:3,n:"Estelar del Día",h:"16:30",d:"2000 m",st:"abierta",c:H([["Reina del Valle","F. Ortiz",2.8],["Sombra","J. Núñez",3.3],["Gran Señor","W. Peña",5],["Pampero","B. Silva",6.5],["Relámpago","K. Ruiz",8],["Tormenta","G. Luna",15]])}]}}
+let D=JSON.parse(localStorage.getItem(K)||"null")||init(),V="inicio",RS=null,sel=[],AM="login";
+const save=()=>localStorage.setItem(K,JSON.stringify(D)),U=()=>D.users[D.cur],RC=()=>D.races.find(r=>r.id==RS)||D.races[0];
+function toast(t,e){const x=$("toast");x.textContent=t;x.className="on"+(e?" err":"");clearTimeout(x.t);x.t=setTimeout(()=>x.className="",2800)}
+function go(v){if(["apuestas","billetera"].includes(v)&&!U()){toast("Inicia sesión primero",1);return auth("login")}V=v;ui();scrollTo(0,0)}
+function auth(m){AM=m;const r=m=="reg";$("at").textContent=r?"Crear cuenta":"Iniciar sesión";$("ab").textContent=r?"Registrarme":"Entrar";$("as").textContent=r?"¿Ya tienes cuenta? Inicia sesión":"¿No tienes cuenta? Regístrate";document.querySelector(".rg").hidden=!r;dAuth.showModal()}
+function authGo(){const u=$("au").value.trim().toLowerCase(),p=$("ap").value;if(!u||!p)return toast("Completa usuario y contraseña",1);
+ if(AM=="login"){const x=D.users[u];if(!x||x.pass!=p)return toast("Usuario o contraseña incorrectos",1);D.cur=u}
+ else{if(D.users[u])return toast("Ese usuario ya existe",1);const n=$("an").value.trim(),d=$("ad").value,f=$("af").value;
+  if(!n||!/^\d{8}$/.test(d)||!f)return toast("Completa nombres, DNI (8 dígitos) y fecha de nacimiento",1);
+  if((Date.now()-new Date(f))/31557600000<18)return toast("Debes ser mayor de 18 años para registrarte",1);
+  D.users[u]={pass:p,nom:n,dni:d,saldo:0,bets:[],movs:[],bono:true};D.cur=u;toast("Cuenta creada. Tienes un bono de bienvenida +10%")}
+ save();dAuth.close();$("ap").value="";ui()}
+function salir(){D.cur=null;save();V="inicio";ui()}
+function recargar(){const u=U(),m=+$("rm").value;if(!(m>=10))return toast("El monto mínimo es S/ 10",1);toast("Procesando pago con la pasarela…");
+ setTimeout(()=>{u.saldo+=m;u.movs.unshift({f:now(),t:"Recarga ("+$("rp").value+")",v:m});if(u.rc&&m>=100){u.saldo+=10;u.rc=false;u.movs.unshift({f:now(),t:"Regalo RECARGA10",v:10})}save();ui();toast("Pago aprobado: +"+money(m))},900)}
+function canjear(){const u=U();if(!u)return auth("login");const c=$("cod").value.trim().toUpperCase();
+ if(c=="BIENVENIDO10"){if(u.bono)return toast("Ya tienes este bono activo",1);u.bono=true}else if(c=="RECARGA10"){if(u.rc)return toast("Ya tienes este código activo",1);u.rc=true}else return toast("Código no válido",1);
+ save();ui();toast("Código canjeado")}
+function art(c){return`<div class="art">${c.img?`<img src="${esc(c.img)}" alt="">`:`<span class="hz">🐎</span>`}<span class="silk" style="background:${c.col}"></span></div>`}
+function ui(){
+ const u=U();$("ua").innerHTML=u?`<span class="bal">${money(u.saldo)}</span><span>👤 ${esc(u.nom.split(" ")[0])}</span><button class="gold sm" onclick="go('billetera')">Recargar</button><button class="out sm" onclick="salir()">Salir</button>`:`<button class="gold" onclick="auth('login')">Iniciar sesión</button><button class="out" onclick="auth('reg')">Registrarse</button>`;
+ const items=[["inicio","Inicio"],["carreras","Carreras"],["apuestas","Mis apuestas"],["billetera","Billetera"],["promos","Promociones"]];if(u&&u.admin)items.push(["admin","Admin"]);
+ $("nav").innerHTML=items.map(i=>`<a class="${V==i[0]?"on":""}" onclick="go('${i[0]}')">${i[1]}</a>`).join("");
+ document.querySelectorAll(".view").forEach(e=>e.hidden=e.id!="v-"+V);
+ $("home").innerHTML=D.races.map(r=>`<div class="rc"><span class="badge ${r.st}">${r.st}</span><h3>${esc(r.n)}</h3><small>${r.h} · ${r.d} · ${r.c.length} caballos</small><div style="margin:10px 0;font-size:1.6rem">${r.c.slice(0,4).map(c=>`<span style="filter:drop-shadow(0 0 4px ${c.col})">🐎</span>`).join("")}</div><button class="gold" onclick="RS=${r.id};sel=[];go('carreras')">${r.st=="abierta"?"Apostar":"Ver"}</button></div>`).join("");
+ if(V=="carreras")rCar();if(V=="apuestas")rBets();if(V=="billetera")rWal();if(V=="admin")rAdm()}
+function rCar(){const r=RC();RS=r.id;
+ $("tabs").innerHTML=D.races.map(x=>`<button class="${x.id==RS?"on":""}" onclick="RS=${x.id};sel=[];ui()">${x.h} · ${esc(x.n)}</button>`).join("");
+ let info=`<span class="badge ${r.st}">${r.st}</span> <b>${esc(r.n)}</b> · ${r.h} · ${r.d}`;
+ if(r.st=="finalizada")info+=`<div class="pod">${r.res.slice(0,3).map((i,k)=>["🥇","🥈","🥉"][k]+" "+esc(r.c[i].n)).join(" &nbsp; ")}</div>`;
+ else if(r.st!="cancelada")info+=`<div style="margin-top:10px"><button class="gold" onclick="correr(${r.id})">▶ Ver carrera en vivo</button></div>`;
+ $("rinfo").innerHTML=info;
+ $("horses").innerHTML=r.c.map((c,i)=>`<div class="hc ${sel.includes(i)?"on":""}" onclick="pick(${i})">${art(c)}<span class="no">${i+1}</span><div class="in"><h4>${esc(c.n)}</h4><small>Jinete: ${esc(c.j)}</small><small>Últimas: ${c.fo}</small><div class="q">${c.q.toFixed(2)}</div></div></div>`).join("");slip()}
+function pick(i){const r=RC();if(r.st!="abierta")return toast("Las apuestas de esta carrera están cerradas",1);const m=$("tipo").value=="Exacta"?2:1;
+ if(sel.includes(i))sel=sel.filter(x=>x!=i);else{sel.push(i);if(sel.length>m)sel.shift()}rCar()}
+function qa(n){$("monto").value=n;slip()}
+function cuota(){const c=RC().c,t=$("tipo").value;if(!sel.length)return 0;if(t=="Ganador")return c[sel[0]].q;if(t=="Place")return 1+(c[sel[0]].q-1)/2.5;return sel.length==2?c[sel[0]].q*c[sel[1]].q*.6:0}
+function slip(){const c=RC().c,t=$("tipo").value,u=U(),m=+$("monto").value||0;$("bl").hidden=!(u&&u.bono);if(!(u&&u.bono))$("bono").checked=false;
+ $("pick").innerHTML=sel.length?sel.map((x,k)=>`${t=="Exacta"?(k+1)+".º ":""}<b>${x+1}. ${esc(c[x].n)}</b> (${c[x].q.toFixed(2)})`).join("<br>")+(t=="Exacta"&&sel.length<2?"<br>Elige el 2.º caballo":""):"Toca un caballo para elegirlo";
+ $("win").textContent="Ganancia posible: "+money(m*cuota()*($("bono").checked?1.1:1))}
+function apostar(){const u=U();if(!u){toast("Inicia sesión para apostar",1);return auth("login")}
+ const r=RC(),t=$("tipo").value,m=+$("monto").value,q=cuota();
+ if(r.st!="abierta")return toast("Las apuestas de esta carrera están cerradas",1);
+ if(!q)return toast(t=="Exacta"?"Elige 2 caballos para la exacta":"Elige un caballo",1);
+ if(!(m>=1))return toast("Monto inválido",1);if(m>u.saldo){toast("Saldo insuficiente. Recarga tu saldo para continuar",1);return}
+ const bo=$("bono").checked&&u.bono;u.saldo-=m;if(bo)u.bono=false;
+ const b={id:"HR-"+(48210+D.seq++*37),r:r.id,t,sel:[...sel],m,q:q*(bo?1.1:1),e:"Pendiente",f:now()};u.bets.unshift(b);u.movs.unshift({f:b.f,t:"Apuesta "+b.id,v:-m});
+ sel=[];save();ui();tk(b)}
+function tk(b,o){const r=D.races.find(x=>x.id==b.r),c=r.c;
+ $("tkb").innerHTML=`<div class="tk"><h4>🐎 HIPÓDROMO REAL</h4><span class="cd">${b.id}</span><div><span>Carrera</span><span>${esc(r.n)}</span></div><div><span>Apuesta</span><span>${b.t}: ${b.sel.map(x=>(x+1)+"."+esc(c[x].n)).join(" › ")}</span></div><div><span>Monto</span><span>${money(b.m)}</span></div><div><span>Cuota</span><span>${b.q.toFixed(2)}</span></div><div><span>Premio posible</span><span>${money(b.m*b.q)}</span></div><div><span>Estado</span><span>${b.e}</span></div><div><span>Fecha</span><span>${b.f}</span></div></div>`;dTk.showModal()}
+function rBets(){const u=U();$("bets").innerHTML=u.bets.length?u.bets.map((b,i)=>{const r=D.races.find(x=>x.id==b.r);return`<tr><td><b>${b.id}</b></td><td>${esc(r.n)}</td><td>${b.t}: ${b.sel.map(x=>x+1).join("-")}</td><td>${money(b.m)}</td><td>${money(b.m*b.q)}</td><td><span class="st ${b.e}">${b.e}</span></td><td><button class="sm" onclick="tk(U().bets[${i}])">Ver</button> ${b.e=="Pendiente"&&r.st=="abierta"?`<button class="red sm" onclick="anular(${i})">Anular</button>`:""}${b.e=="Ganada"?`<button class="gold sm" onclick="cobrar(${i})">Cobrar</button>`:""}</td></tr>`}).join(""):`<tr><td colspan="7" style="color:var(--m)">Todavía no tienes apuestas.</td></tr>`}
+function anular(i){const u=U(),b=u.bets[i];b.e="Anulada";u.saldo+=b.m;u.movs.unshift({f:now(),t:"Anulación "+b.id,v:b.m});save();ui();toast("Boleto anulado. Se devolvió "+money(b.m))}
+function cobrar(i){const u=U(),b=u.bets[i],p=b.m*b.q;b.e="Cobrada";u.saldo+=p;u.movs.unshift({f:now(),t:"Premio "+b.id,v:p});save();ui();toast("Premio cobrado: "+money(p))}
+function consultar(){const c=$("cb").value.trim().toUpperCase();for(const u of Object.values(D.users)){const b=u.bets.find(x=>x.id==c);if(b)return tk(b)}toast("No existe un boleto con ese código",1)}
+function rWal(){const u=U();$("bsal").textContent=money(u.saldo);$("movs").innerHTML=u.movs.length?u.movs.map(m=>`<tr><td>${m.f}</td><td>${esc(m.t)}</td><td style="color:${m.v>=0?"var(--ok)":"var(--er)"};font-weight:700">${m.v>=0?"+":""}${money(m.v)}</td></tr>`).join(""):`<tr><td colspan="3" style="color:var(--m)">Sin movimientos.</td></tr>`}
+function settle(r){let g=0;Object.entries(D.users).forEach(([k,u])=>u.bets.forEach(b=>{if(b.r!=r.id||b.e!="Pendiente")return;const o=r.res,s=b.sel;
+ const w=b.t=="Ganador"?o[0]==s[0]:b.t=="Place"?o.slice(0,2).includes(s[0]):(o[0]==s[0]&&o[1]==s[1]);b.e=w?"Ganada":"Perdida";if(w&&k==D.cur)g+=b.m*b.q}));save();return g}
+function correr(id){const r=D.races.find(x=>x.id==id);if(r.st!="abierta"&&r.st!="cerrada")return;
+ const w=r.c.map((c,i)=>[i,1/c.q]),o=[];while(w.length){const t=w.reduce((a,b)=>a+b[1],0);let x=Math.random()*t,k=0;while(k<w.length-1&&x>w[k][1]){x-=w[k][1];k++}o.push(w[k][0]);w.splice(k,1)}
+ r.st="finalizada";r.res=o;save();$("rt").textContent="🏁 "+r.n;$("pod").innerHTML="";$("rx").disabled=true;
+ $("lanes").innerHTML=r.c.map((c,i)=>`<div class="lane"><span class="nm"><b style="color:${c.col}">■</b> ${i+1}. ${esc(c.n)}</span><div class="tr"><span class="rh" id="h${i}">🐎</span></div></div>`).join("");dRace.showModal();
+ setTimeout(()=>o.forEach((i,p)=>{const e=$("h"+i);e.style.transition=`left ${4.5+p*.35+Math.random()*.12}s cubic-bezier(.45,0,.55,1)`;e.style.left="calc(100% - 34px)"}),150);
+ setTimeout(()=>{const g=settle(r);$("pod").innerHTML=o.slice(0,3).map((i,k)=>["🥇","🥈","🥉"][k]+" "+esc(r.c[i].n)).join("<br>")+(g?`<br><b style="color:var(--ok)">¡Ganaste ${money(g)}! Cobra tu premio en "Mis apuestas".</b>`:"");$("rx").disabled=false;ui()},(4.5+o.length*.35+.9)*1000)}
+function rAdm(){const all=Object.values(D.users).flatMap(u=>u.bets),ap=all.filter(b=>b.e!="Anulada").reduce((a,b)=>a+b.m,0),pr=all.filter(b=>b.e=="Ganada"||b.e=="Cobrada").reduce((a,b)=>a+b.m*b.q,0);
+ $("stats").innerHTML=[["Usuarios",Object.keys(D.users).length-1],["Apuestas",all.length],["Total apostado",money(ap)],["Premios generados",money(pr)],["Margen",money(ap-pr)]].map(x=>`<div class="stat"><b>${x[1]}</b><small>${x[0]}</small></div>`).join("");
+ $("alist").innerHTML=D.races.map(r=>`<tr><td>${esc(r.n)}</td><td>${r.h}</td><td><span class="badge ${r.st}">${r.st}</span></td><td>${r.st=="abierta"?`<button class="sm" onclick="est(${r.id},'cerrada')">Cerrar apuestas</button>`:r.st=="cerrada"?`<button class="sm" onclick="est(${r.id},'abierta')">Reabrir</button>`:""} ${r.st=="abierta"||r.st=="cerrada"?`<button class="red sm" onclick="cancel(${r.id})">Cancelar</button>`:""}</td></tr>`).join("")}
+function est(id,s){D.races.find(r=>r.id==id).st=s;save();ui()}
+function cancel(id){if(!confirm("¿Cancelar la carrera? Se devolverán las apuestas."))return;const r=D.races.find(x=>x.id==id);r.st="cancelada";
+ Object.values(D.users).forEach(u=>u.bets.forEach(b=>{if(b.r==id&&b.e=="Pendiente"){b.e="Anulada";u.saldo+=b.m;u.movs.unshift({f:now(),t:"Devolución "+b.id,v:b.m})}}));save();ui();toast("Carrera cancelada y apuestas devueltas")}
+function crear(){const n=$("cn").value.trim(),cs=$("cc").value.split("\n").map(l=>l.split(",").map(s=>s.trim())).filter(a=>a[0]);
+ if(!n||cs.length<3||cs.some(a=>a.length<3||!(parseFloat(a[2])>1)))return toast("Completa el nombre y mínimo 3 caballos con formato: nombre, jinete, cuota (mayor a 1)",1);
+ D.races.push({id:D.rid++,n,h:$("ch").value,d:$("cd").value,st:"abierta",c:H(cs.map(a=>[a[0],a[1],parseFloat(a[2])]))});save();$("cn").value="";ui();toast("Carrera creada")}
+D.races.filter(r=>r.st=="finalizada"&&r.res).forEach(settle);ui();
+</script>
+</body>
+</html>
